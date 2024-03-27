@@ -27,6 +27,8 @@ export const PREDETERMINED_SALT_NONCE =
 
 const ZKSYNC_MAINNET = 324n
 const ZKSYNC_TESTNET = 280n
+const ZKLINK_MAINNET = 810180n;
+const ZKLINK_TESTNET = 810182n;
 // For bundle size efficiency we store SafeProxy.sol/GnosisSafeProxy.sol zksync bytecode hash in hex.
 // To get the values below we need to:
 // 1. Compile Safe smart contracts for zksync
@@ -242,7 +244,7 @@ export async function predictSafeAddress({
   const from = await safeProxyFactoryContract.getAddress()
 
   // On the zkSync Era chain, the counterfactual deployment address is calculated differently
-  const isZkSyncEraChain = [ZKSYNC_MAINNET, ZKSYNC_TESTNET].includes(chainId)
+  const isZkSyncEraChain = [ZKSYNC_MAINNET, ZKSYNC_TESTNET, ZKLINK_MAINNET, ZKLINK_TESTNET].includes(chainId);
   if (isZkSyncEraChain) {
     const proxyAddress = zkSyncEraCreate2Address(from, safeVersion, salt, input)
 
